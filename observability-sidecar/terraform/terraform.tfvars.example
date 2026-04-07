@@ -1,0 +1,12 @@
+# ═══════════════════════════════════════════════════════════════
+# Copy this file to terraform.tfvars and fill in your values.
+# ═══════════════════════════════════════════════════════════════
+
+project_id                = "scribd-vertex-ai-search-prod"
+region                    = "us-central1"
+data_store_ids            = "datastore-english-shard-1,datastore-english-shard-2"
+discovery_engine_location = "global"
+canary_query              = "how to reset my password"
+schedule_cron             = "*/5 * * * *"
+alert_email               = "team@scribd.com"
+latency_threshold_ms      = 5000

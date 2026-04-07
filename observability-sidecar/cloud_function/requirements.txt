@@ -1,0 +1,5 @@
+functions-framework==3.*
+google-cloud-discoveryengine==0.13.*
+google-cloud-monitoring==2.21.*
+google-auth==2.*
+requests==2.*

@@ -1,0 +1,242 @@
+{
+  "displayName": "Vertex AI Search — Observability Dashboard",
+  "mosaicLayout": {
+    "columns": 12,
+    "tiles": [
+      {
+        "xPos": 0,
+        "yPos": 0,
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "Indexed Document Count (per Data Store)",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/indexed_document_count\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "groupByFields": ["metric.label.data_store_id"]
+                    }
+                  }
+                },
+                "plotType": "LINE"
+              }
+            ],
+            "yAxis": {
+              "label": "Documents",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 6,
+        "yPos": 0,
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "Ingestion Velocity (Document Count Delta / 5 min)",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/indexed_document_count\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_DELTA",
+                      "groupByFields": ["metric.label.data_store_id"]
+                    }
+                  }
+                },
+                "plotType": "STACKED_BAR"
+              }
+            ],
+            "yAxis": {
+              "label": "Docs Indexed / 5 min",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 4,
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "Search Latency (ms) — Synthetic Probe",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/search_latency_ms\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "groupByFields": ["metric.label.data_store_id"]
+                    }
+                  }
+                },
+                "plotType": "LINE"
+              }
+            ],
+            "yAxis": {
+              "label": "Latency (ms)",
+              "scale": "LINEAR"
+            },
+            "thresholds": [
+              {
+                "value": 5000,
+                "label": "Alert Threshold (5s)",
+                "color": "RED"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "xPos": 6,
+        "yPos": 4,
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "Search Probe Success Rate",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/search_success\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "groupByFields": ["metric.label.data_store_id"]
+                    }
+                  }
+                },
+                "plotType": "LINE"
+              }
+            ],
+            "yAxis": {
+              "label": "Success (1.0 = OK)",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 8,
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "LRO Pending Operations (Import Queue Depth)",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/lro_pending_count\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "groupByFields": ["metric.label.data_store_id"]
+                    }
+                  }
+                },
+                "plotType": "LINE"
+              }
+            ],
+            "yAxis": {
+              "label": "Pending Operations",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 6,
+        "yPos": 8,
+        "width": 6,
+        "height": 4,
+        "widget": {
+          "title": "LRO Completed Operations (Cumulative)",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/lro_completed_count\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "groupByFields": ["metric.label.data_store_id"]
+                    }
+                  }
+                },
+                "plotType": "LINE"
+              }
+            ],
+            "yAxis": {
+              "label": "Completed Operations",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      },
+      {
+        "xPos": 0,
+        "yPos": 12,
+        "width": 12,
+        "height": 4,
+        "widget": {
+          "title": "Ingestion vs. Latency Correlation",
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/indexed_document_count\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_DELTA"
+                    }
+                  }
+                },
+                "plotType": "STACKED_BAR",
+                "targetAxis": "Y1"
+              },
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"custom.googleapis.com/vertex_ai_search/search_latency_ms\" resource.type=\"global\"",
+                    "aggregation": {
+                      "alignmentPeriod": "300s",
+                      "perSeriesAligner": "ALIGN_MEAN"
+                    }
+                  }
+                },
+                "plotType": "LINE",
+                "targetAxis": "Y2"
+              }
+            ],
+            "yAxis": {
+              "label": "Docs Indexed / 5 min",
+              "scale": "LINEAR"
+            },
+            "y2Axis": {
+              "label": "Search Latency (ms)",
+              "scale": "LINEAR"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
